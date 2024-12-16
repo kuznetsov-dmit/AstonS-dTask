@@ -19,15 +19,4 @@ public abstract class BaseRepository {
         return dataSource.getConnection();
     }
 
-    protected void closeQuietly(AutoCloseable... closeables) {
-        for (AutoCloseable closeable : closeables) {
-            try {
-                if (closeable != null) {
-                    closeable.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
