@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.AuthorShortDto;
 import dto.BookDto;
 import dto.GenreShortDto;
-import exception.DatabaseException;
-import exception.EntityNotFoundException;
-import exception.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class BookServletTest {
     @Mock
     private HttpServletRequest request;

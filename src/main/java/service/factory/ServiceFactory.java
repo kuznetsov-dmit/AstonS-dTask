@@ -11,17 +11,19 @@ import service.BookService;
 import service.GenreService;
 
 public class ServiceFactory {
-    private static final ServiceFactory INSTANCE = new ServiceFactory();
+    private static ServiceFactory INSTANCE = null;
 
     private final AuthorService authorService;
     private final BookService bookService;
     private final GenreService genreService;
 
-    private ServiceFactory() {
-        AuthorRepository authorRepository = new AuthorRepository();
-        BookRepository bookRepository = new BookRepository();
-        GenreRepository genreRepository = new GenreRepository();
+    // Конструктор для production
+    ServiceFactory() {
+        this(new AuthorRepository(), new BookRepository(), new GenreRepository());
+    }
 
+    // Конструктор для тестов
+    ServiceFactory(AuthorRepository authorRepository, BookRepository bookRepository, GenreRepository genreRepository) {
         AuthorMapper authorMapper = AuthorMapper.INSTANCE;
         BookMapper bookMapper = BookMapper.INSTANCE;
         GenreMapper genreMapper = GenreMapper.INSTANCE;
@@ -33,7 +35,15 @@ public class ServiceFactory {
     }
 
     public static ServiceFactory getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceFactory();
+        }
         return INSTANCE;
+    }
+
+    // Метод для тестов
+    static void setInstance(ServiceFactory instance) {
+        INSTANCE = instance;
     }
 
     public AuthorService getAuthorService() {

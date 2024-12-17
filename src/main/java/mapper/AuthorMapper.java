@@ -1,7 +1,6 @@
 package mapper;
 
 import dto.AuthorDto;
-import dto.AuthorShortDto;
 import entity.Author;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
